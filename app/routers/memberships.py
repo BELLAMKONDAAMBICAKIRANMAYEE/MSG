@@ -1,11 +1,10 @@
-
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy import select
 
-from app.dependencies import CurrentUser, DbSession, require_role
+from app.dependencies import DbSession, require_role
 from app.models import Membership
 from app.schemas import MembershipCreate, MembershipResponse
-from app.services import subscribe_member, renew_membership, expire_memberships
+from app.services import subscribe_member, expire_memberships
 
 router = APIRouter()
 
@@ -31,7 +30,6 @@ def my_memberships(
         .where(Membership.member_id == member.id)
         .order_by(Membership.id.desc())
     ).all()
-
 
 @router.patch("/{membership_id}/renew", response_model=MembershipResponse)
 def renew(

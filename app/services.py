@@ -12,8 +12,9 @@ from app.models import Membership, Plan, User
 
 def gym_today() -> date:
     from app.settings import settings
-    return datetime.now(ZoneInfo(settings.GYM_TIMEZONE)).date()
-
+    return datetime.now(
+        ZoneInfo(settings.GYM_TIMEZONE)
+    ).date()
 
 def membership_end_date(start_date: date, duration_months: int) -> date:
     # End date is exclusive: the membership is valid before this date.

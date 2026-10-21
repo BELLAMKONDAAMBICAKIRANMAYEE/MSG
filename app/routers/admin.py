@@ -4,10 +4,21 @@ from sqlalchemy import select
 
 from app.dependencies import DbSession, require_role
 from app.models import Membership, User
-from app.schemas import TrainerAssignment, MembershipResponse
+from app.schemas import TrainerAssignment, MembershipResponse,UserResponse
 
 router = APIRouter()
 
+
+@router.get("/users", response_model=list[UserResponse])
+def get_all_users(
+    db: DbSession,
+    admin=Depends(require_role("admin")),
+):
+    users = db.scalars(
+        select(User).order_by(User.id)
+    ).all()
+
+    return users
 
 @router.patch(
     "/memberships/{membership_id}/assign",
