@@ -48,9 +48,9 @@ class PlanResponse(BaseModel):
     price: Decimal
     description: str | None
 
-
 class MembershipCreate(BaseModel):
-    plan_id: int
+    plan_id: int = Field(gt=0)
+    trainer_id: int | None = Field(default=None, gt=0)
 
 
 class MembershipResponse(BaseModel):
@@ -66,7 +66,7 @@ class MembershipResponse(BaseModel):
 
 
 class TrainerAssignment(BaseModel):
-    trainer_id: int
+    trainer_id: int = Field(gt=0)  
 
 
 class AttendanceCreate(BaseModel):
@@ -78,11 +78,11 @@ class AttendanceResponse(BaseModel):
 
     id: int
     member_id: int
-    checked_in_at: datetime
-    checked_in_by: int
-    attendance_date: date
+    checked_in_at: date
+    # checked_in_by: int
+    # attendance_date: date
 
-
+    model_config = ConfigDict(from_attributes=True)
 class AttendanceReportItem(BaseModel):
     date: date
     total_checkins: int

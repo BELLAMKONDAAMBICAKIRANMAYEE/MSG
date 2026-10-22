@@ -1,4 +1,3 @@
-
 from datetime import date, datetime, timezone
 from zoneinfo import ZoneInfo
 
@@ -13,6 +12,7 @@ from app.services import gym_today, get_active_membership
 from app.settings import settings
 
 router = APIRouter()
+
 
 
 @router.post("/", response_model=AttendanceResponse, status_code=201)

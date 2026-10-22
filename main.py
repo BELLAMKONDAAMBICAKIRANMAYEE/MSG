@@ -48,6 +48,8 @@ app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 app.include_router(trainer.router, prefix="/trainer", tags=["Trainer"])
 
 
+
+
 @app.get("/")
 def home():
     return {

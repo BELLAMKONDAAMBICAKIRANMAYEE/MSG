@@ -5,8 +5,12 @@ from fastapi import FastAPI
 
 from app.database import Base, engine
 from app import models  # Register all ORM models
-from app.routers import auth, plans, memberships, attendance, admin, trainer
-
+from app.routers.auth import router as auth_router
+from app.routers.plans import router as plans_router
+from app.routers.memberships import router as memberships_router
+from app.routers.attendance import router as attendance_router
+from app.routers.admin import router as admin_router
+from app.routers.trainer import router as trainer_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
